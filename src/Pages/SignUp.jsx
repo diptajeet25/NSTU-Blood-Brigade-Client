@@ -17,7 +17,7 @@ const SignUp = () => {
 
 
   const password = watch("password");
-  const {createUser, updateUser}=useContext(AuthContext);
+  const {createUser, updateUser,emailVerifcation,logoutUser}=useContext(AuthContext);
 
   const handleRegister=(data)=>{
     setLoad(true);
@@ -26,10 +26,10 @@ const SignUp = () => {
     const profilePhoto=data.photo[0];
     const name=data.name;
     createUser(email,password)
-    .then(()=>
+    .then((res)=>
     {
 
-    
+emailVerifcation(res.user)
       const formdata=new FormData();
       formdata.append("image",profilePhoto);
       const url=`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_hosting_key}`
@@ -41,10 +41,11 @@ const SignUp = () => {
           photoURL:res.data.data.url
         }
         updateUser(userProfile)
-        .then(()=>
+        .then(async()=>
         {
-        toast.success("User Signed Up Successfully..")
-          navigate("/");
+          await logoutUser()
+          toast.success("Registration successful! Please verify your email before logging in.")
+          navigate("/verify-email");
 
         })
         .catch((error)=>

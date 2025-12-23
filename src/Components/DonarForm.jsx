@@ -4,6 +4,7 @@ import { AuthContext } from '../Context/AuthContext';
 import useAxiosSecure from '../Hooks/useAxiosSecure';
 import { toast } from 'react-toastify';
 import logo from '../assets/Logo2.png'
+import { useQueryClient } from '@tanstack/react-query';
 
 const DonarForm = () => {
     const { register, handleSubmit,control,reset, formState: { errors } } = useForm({
@@ -12,6 +13,7 @@ const DonarForm = () => {
     email: ""
   }
 });
+const queryClient = useQueryClient();
     const {user}=use(AuthContext);
     const [departments,setDepartments]=useState([]);
     const [districts,setDistricts]=useState([]);
@@ -59,7 +61,9 @@ const DonarForm = () => {
         {
           toast.success("Registered as a Donar Successfully");
           setLoad(false);
+
           reset();
+          queryClient.invalidateQueries(['donorData',user?.email]);
         }
       })
       .catch((err)=>

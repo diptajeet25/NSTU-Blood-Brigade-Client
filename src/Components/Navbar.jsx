@@ -52,7 +52,7 @@ const Navbar = () => {
     </ul>
   </div>
   <div className="navbar-end">
-    {user ? 
+    {user && user.emailVerified  ? 
 
       <div className="dropdown dropdown-left dropdown-bottom">
       <div tabIndex={0} role="button" className="btn btn-ghost ">

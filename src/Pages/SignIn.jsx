@@ -9,22 +9,34 @@ import { toast } from "react-toastify";
 
 const SignIn = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const { loginUser } = useContext(AuthContext);
+  const { loginUser,logoutUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const [load, setLoad] = useState(false);
 
-  const handleLogin = (data) => {
+  const handleLogin =async (data) => {
     setLoad(true);
+try{
+  const res=await loginUser(data.email, data.password)
+  await res.user.reload();
+  if(!res.user.emailVerified)
+  {
+    await logoutUser();
+    toast.error("Please verify your email before logging in.");
+    setLoad(false);
+    return;
+  }
+   toast.success("Successfully logged in");
+    navigate("/");
 
-    loginUser(data.email, data.password)
-      .then(() => {
-  toast.success("Successfully logged in");
-        navigate("/");
-      })
-      .catch((err) => {
-    toast.error(err.message);
-        setLoad(false);
-      });
+}
+catch(err)
+{
+  toast.error(err.message);
+    setLoad(false);
+
+}
+    
+ 
   };
 
   return (

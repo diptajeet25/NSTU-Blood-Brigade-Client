@@ -1,6 +1,6 @@
 import React, {  useEffect, useState } from 'react';
 import { AuthContext } from './AuthContext';
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
+import { createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 import { auth } from '../Firebase/firebase.init';
 import { GoogleAuthProvider } from "firebase/auth";
 
@@ -29,6 +29,14 @@ const AuthProvider = ({children}) => {
       setLoading(true)
       return signInWithPopup(auth , provider)
     }
+
+    const emailVerifcation=async(user)=>
+    {
+      return await sendEmailVerification(user,{
+        url:"http://localhost:5173/auth",
+         handleCodeInApp: false,
+      })
+    }
     const logoutUser=()=>
     {
       setLoading(true)
@@ -54,7 +62,7 @@ const AuthProvider = ({children}) => {
 
     },[])
 
-    const authInfo={user,setUser,createUser,loginUser,logoutUser,googleSignIn,loading,setLoading,updateUser}
+    const authInfo={user,setUser,createUser,loginUser,logoutUser,googleSignIn,loading,setLoading,updateUser,emailVerifcation}
   return (
    <AuthContext value={authInfo}>
     {children}

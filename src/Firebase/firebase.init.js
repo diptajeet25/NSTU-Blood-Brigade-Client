@@ -6,12 +6,13 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBe1-sD3g2CkJ2AFr-oAGimGUr7KxGoChE",
-  authDomain: "nstu-blood-brigade.firebaseapp.com",
-  projectId: "nstu-blood-brigade",
-  storageBucket: "nstu-blood-brigade.firebasestorage.app",
-  messagingSenderId: "362754603360",
-  appId: "1:362754603360:web:6e608c7c99beb1db844605"
+ apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+ 
 };
 
 // Initialize Firebase

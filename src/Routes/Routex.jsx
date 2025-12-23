@@ -5,6 +5,8 @@ import AuthLayout from "../Layout/AuthLayout";
 import SignIn from "../Pages/SignIn";
 import SignUp from "../Pages/SignUp";
 import DonarLayout from "../Layout/DonarLayout";
+import RequestLayout from "../Layout/RequestLayout";
+import VerifyEmail from "../Pages/VerifyUser";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +37,14 @@ const router = createBrowserRouter([
     path:"/beADonor",
     element:<DonarLayout></DonarLayout>
 
+  },
+  {
+    path:"/requestBlood",
+    element:<RequestLayout></RequestLayout>
+  },
+  {
+    path:"/verify-email",
+    element:<VerifyEmail></VerifyEmail>
   }
 ]);
 export default router;
