@@ -7,6 +7,9 @@ import SignUp from "../Pages/SignUp";
 import DonarLayout from "../Layout/DonarLayout";
 import RequestLayout from "../Layout/RequestLayout";
 import VerifyEmail from "../Pages/VerifyUser";
+import AllRequest from "../Layout/AllRequest";
+import AllDonar from "../Layout/AllDonar";
+import MyProfile from "../Layout/MyProfile";
 
 const router = createBrowserRouter([
   {
@@ -45,6 +48,18 @@ const router = createBrowserRouter([
   {
     path:"/verify-email",
     element:<VerifyEmail></VerifyEmail>
+  },
+  {
+    path:"/requests",
+    element:<AllRequest></AllRequest>
+  },
+  {
+    path:"/donors",
+    element:<AllDonar></AllDonar>
+  },
+  {
+    path:"/profile",
+    element:<MyProfile></MyProfile>
   }
 ]);
 export default router;
