@@ -11,7 +11,7 @@ import useAxiosSecure from '../Hooks/useAxiosSecure';
 const DonarLayout = () => {
   const {user,loading}=use(AuthContext)
   const axiosSecure=useAxiosSecure();
-  const {data:donorData={},isLoading}=useQuery({
+  const {data:donorData,isLoading}=useQuery({
     queryKey:['donorData',user?.email],
     enabled:!!user?.email,
     queryFn:async()=>{
@@ -25,10 +25,11 @@ const DonarLayout = () => {
   if(loading || isLoading){
     return <BloodLoading></BloodLoading>
   }
+  console.log(donorData);
   return (
     <div>
         <Navbar></Navbar>
-       {donorData?.message === 'No donor found'
+       {!donorData
   ? <DonarForm />
   : <AlreadyDonorCard donorData={donorData} />
 }

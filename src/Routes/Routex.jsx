@@ -10,6 +10,7 @@ import VerifyEmail from "../Pages/VerifyUser";
 import AllRequest from "../Layout/AllRequest";
 import AllDonar from "../Layout/AllDonar";
 import MyProfile from "../Layout/MyProfile";
+import MyRequests from "../Pages/MyRequests";
 
 const router = createBrowserRouter([
   {
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
   {
     path:"/profile",
     element:<MyProfile></MyProfile>
+  },
+  {
+    path:"/myrequests",
+    element:<MyRequests></MyRequests>
   }
 ]);
 export default router;

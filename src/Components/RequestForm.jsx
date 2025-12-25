@@ -29,6 +29,7 @@ const RequestForm = () => {
         {
           setLoad(true);
           data.email=user.email;
+          data.status="pending";
 
           axiosSecure.post('/request-blood',data)
           .then((res)=>

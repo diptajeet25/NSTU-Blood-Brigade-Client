@@ -12,9 +12,10 @@ const AlreadyDonorCard = ({ donorData }) => {
           <InfoRow label="Name" value={donorData?.fullName} />
           <InfoRow label="Email" value={donorData?.email} />
           <InfoRow label="Blood Group" value={donorData?.bloodGroup} />
-          <InfoRow label="District" value={donorData?.district} />
+          <InfoRow label="Home District" value={donorData?.homeDistrict} />
+           <InfoRow label="Current District" value={donorData?.currentDistrict} />
           <InfoRow label="Phone" value={donorData?.phone} />
-          <InfoRow label="Last Donation Date" value={donorData?.lastDonationDate} />
+          <InfoRow label="Last Donation Date" value={new Date(donorData?.lastDonationDate).toLocaleDateString()} />
         </div>
         <div className="mt-6 bg-red-50 border border-red-100 rounded-lg p-4 text-sm text-gray-700">
           If any information is incorrect, please contact the admin to update your donor profile.

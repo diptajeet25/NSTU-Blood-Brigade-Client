@@ -11,9 +11,9 @@ const Navbar = () => {
   console.log(user)
 
   const links=<div className='flex flex-col md:flex-row gap-6 items-center'>
-    <Link to="/" className='flex gap-1 items-center text-xl'> <House />  Home</Link>
-    <Link to="/beADonor" className='text-xl'>Be a Donor</Link>
-    <Link to="/requestBlood" className='text-xl'>Request Blood</Link>
+    <Link to="/" className='flex gap-1 items-center text-xl'> Home</Link>
+    <Link to="/donors" className='text-xl'>Find Donors</Link>
+    <Link to="/requests" className='text-xl'>All Requests</Link>
     <Link to="/aboutUs" className='text-xl'>About Us</Link>
 
   </div>
@@ -37,13 +37,13 @@ const Navbar = () => {
       </div>
       <ul
         tabIndex="-1"
-        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow text-white">
         {links}
       </ul>
     </div>
     <Link to="/"><img src={logo}  className='w-14 h-12  rounded-2xl hidden md:flex'></img></Link>
     
-    <span className="btn btn-ghost normal-case text-lg md:text-2xl ">NSTU Blood Brigade</span>
+    <Link to="/" className="btn btn-ghost normal-case text-xl md:text-2xl  ">NSTU Blood Brigade</Link>
 
   </div>
   <div className="navbar-center hidden lg:flex">
@@ -60,10 +60,11 @@ const Navbar = () => {
       </div>
       <ul
         tabIndex="-1"
-        className="menu menu-sm dropdown-content border border-black  bg-white rounded-box z-1 mt-2 w-52 p-2 shadow">
-          <Link to="/" className='text-xl mt-2 pb-2'>My Profile</Link>
+        className="menu menu-sm dropdown-content border border-black  bg-white rounded-box  w-52 p-2 shadow">
+          <Link to="/profile" className='text-xl mt-2 pb-2'>My Profile</Link>
       <Link to="/beADonor" className='text-xl mt-2 pb-2'>Be a Donor</Link>
     <Link to="/requestBlood" className='text-xl mt-2 pb-2'>Request Blood</Link>
+    <Link to="/myrequests" className='text-xl mt-2 pb-2'>My Requests</Link>
     <Link> <button onClick={handleLogOut} className='text-xl mt-2 pb-2 w-full text-left hover:cursor-pointer'>Logout</button></Link>
       </ul>
     </div>

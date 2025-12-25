@@ -45,8 +45,11 @@ const queryClient = useQueryClient();
 
     const divisons=districts.map(d=>d.division);
     const uniqueDivisons=[...new Set(divisons)];
-    const myRegion=useWatch({control,name:"division"});
-    const filteredDistricts=districts.filter(d=>d.division===myRegion);
+    const homeRegion=useWatch({control,name:"homeDivision"});
+    const currentRegion=useWatch({control,name:"currentDivision"})
+
+    const filteredDistricts=districts.filter(d=>d.division===homeRegion);
+     const filteredDistricts2=districts.filter(d=>d.division===currentRegion);
 
 
     const handleRegisterDonar=(data)=>
@@ -126,11 +129,12 @@ errors.gender && <p className="text-red-600 text-sm">Gender is required</p>
             </div>
             </div>
 
-            <div className='flex flex-col md:flex-row items-start md:items-center  justify-evenly gap-2 md:gap-24'>
+
+ <div className='flex flex-col md:flex-row items-start md:items-center  justify-evenly gap-2 md:gap-24'>
                 <div className='w-full md:flex-1'>
-                <label className="block text-lg font-bold text-gray-700">Home Division</label>
+                <label className="block text-lg font-bold text-gray-700">Current Division</label>
                 <select className="mt-1 block w-full text-lg rounded-lg border px-3 py-2  focus:outline-none
-              focus:ring-2 focus:ring-[#7b7b7b] focus:border-transparent" {...register("division", { required: true })}>
+              focus:ring-2 focus:ring-[#7b7b7b] focus:border-transparent" {...register("currentDivision", { required: true })}>
                     <option value="">Select Division</option>
                     {
                         uniqueDivisons.map((division, index) => (
@@ -138,12 +142,43 @@ errors.gender && <p className="text-red-600 text-sm">Gender is required</p>
                         ))
                     }
                 </select>
-                {errors.division && <p className="text-red-600 text-sm">Division is required</p>}
+                {errors.currentDivision && <p className="text-red-600 text-sm">Current Division is required</p>}
+                </div>
+                <div className='w-full flex-1'>
+                <label className="block text-lg font-bold text-gray-700">Current District</label>
+                <select className="mt-1 block w-full text-lg rounded-lg border px-3 py-2  focus:outline-none
+              focus:ring-2 focus:ring-[#7b7b7b] focus:border-transparent" {...register("currentDistrict", { required: true })}>
+                    <option value="">Select District</option>
+                    {
+                        filteredDistricts2.map((district, index) => (
+                            <option key={index} value={district.districtName}>{district.districtName}</option>
+                        ))
+                    }
+                </select>
+                {errors.currentDistrict && <p className="text-red-600 text-sm">Current District is required</p>}
+                </div>
+            </div>
+
+
+
+            <div className='flex flex-col md:flex-row items-start md:items-center  justify-evenly gap-2 md:gap-24'>
+                <div className='w-full md:flex-1'>
+                <label className="block text-lg font-bold text-gray-700">Home Division</label>
+                <select className="mt-1 block w-full text-lg rounded-lg border px-3 py-2  focus:outline-none
+              focus:ring-2 focus:ring-[#7b7b7b] focus:border-transparent" {...register("homeDivision", { required: true })}>
+                    <option value="">Select Division</option>
+                    {
+                        uniqueDivisons.map((division, index) => (
+                            <option key={index} value={division}>{division}</option>
+                        ))
+                    }
+                </select>
+                {errors.homeDivision && <p className="text-red-600 text-sm">Home Division is required</p>}
                 </div>
                 <div className='w-full flex-1'>
                 <label className="block text-lg font-bold text-gray-700">Home District</label>
                 <select className="mt-1 block w-full text-lg rounded-lg border px-3 py-2  focus:outline-none
-              focus:ring-2 focus:ring-[#7b7b7b] focus:border-transparent" {...register("district", { required: true })}>
+              focus:ring-2 focus:ring-[#7b7b7b] focus:border-transparent" {...register("homeDistrict", { required: true })}>
                     <option value="">Select District</option>
                     {
                         filteredDistricts.map((district, index) => (
@@ -151,7 +186,7 @@ errors.gender && <p className="text-red-600 text-sm">Gender is required</p>
                         ))
                     }
                 </select>
-                {errors.district && <p className="text-red-600 text-sm">District is required</p>}
+                {errors.homeDistrict && <p className="text-red-600 text-sm">Home District is required</p>}
                 </div>
             </div>
 

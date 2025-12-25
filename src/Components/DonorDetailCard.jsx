@@ -27,7 +27,9 @@ const DonorDetailCard = ({donor}) => {
             <h3 className="text-2xl font-extrabold"> {donor.fullName}</h3>
             <h3 className='text-md lg:text-lg font-normal flex items-start gap-1'><GraduationCap  /> : {donor.department}</h3>
             {/* <h3 className='text-md lg:text-lg font-normal flex items-start gap-1'><Mail /> : {donor.email}</h3> */}
-            <h3 className='text-md lg:text-lg font-normal flex items-start gap-1'><MapPin></MapPin> : {donor.district}, {donor.division}</h3>
+            <h3 className='text-md lg:text-lg font-normal flex items-start gap-1'><MapPin></MapPin> : {donor.currentDistrict}, {donor.currentDivision}</h3>
+             <h3 className='text-md lg:text-lg font-normal flex items-start gap-1'><Home></Home> : {donor.homeDistrict}, {donor.homeDivision}</h3>
+           
             </div>
             
       
