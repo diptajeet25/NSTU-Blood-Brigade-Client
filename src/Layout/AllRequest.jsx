@@ -1,4 +1,4 @@
-import React, { use } from 'react';
+import React, { use, useState } from 'react';
 import Navbar from '../Components/Navbar.jsx';
 import Footer from '../Components/Footer.jsx';
 import { useQuery } from '@tanstack/react-query';
@@ -10,12 +10,19 @@ import RequestCard from '../Components/RequestCard.jsx';
 const AllRequest = () => {
     const {user,loading}=use(AuthContext);
     const axiosSecure=useAxiosSecure();
-    const {data:requests=[],isLoading}=useQuery({
-        queryKey:['request'],
+      const [totalPages, setTotalPages] = useState(1);
+      const [requests,setRequests]=useState([])
+       const [page, setPage] = useState(1);
+    const limit=20;
+    const {data,isLoading}=useQuery({
+        queryKey:['request',page],
         enabled:!!user?.email && !loading,
         queryFn:async()=>{
-            const res=await axiosSecure.get(`/requests`);
+            const res=await axiosSecure.get(`/requests?page=${page}&limit=${limit}`);
+            setRequests(res.data.requests || []);
+            setTotalPages(res.data.totalPages || 1);
             return res.data;
+
         }
     })
 
@@ -37,6 +44,16 @@ const AllRequest = () => {
             </div>
 
         </div>
+
+        <div className="flex flex-wrap justify-center items-center gap-2 mb-8 mt-8 ">
+
+  <button onClick={() => setPage(page - 1)} disabled={page === 1} className={`px-3 py-1 rounded border ${page === 1 ? 'bg-gray-200 cursor-not-allowed' : 'hover:bg-red-600 hover:text-white'}`}>Prev</button>
+  {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+    <button key={p} onClick={() => setPage(p)} className={`px-3 py-1 hover:cursor-pointer rounded border ${page === p ? 'bg-red-600 text-white font-semibold' : 'hover:bg-red-100'}`}>{p} </button>
+  ))}
+
+  <button onClick={() => setPage(page + 1)} disabled={page === totalPages} className={`px-3 py-1 rounded border ${page === totalPages ? 'bg-gray-200 cursor-not-allowed' : 'hover:bg-red-600 hover:text-white'}`}>Next</button>
+</div>
         <Footer></Footer>
     </div>
   );

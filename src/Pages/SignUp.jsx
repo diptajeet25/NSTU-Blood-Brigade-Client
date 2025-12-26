@@ -78,7 +78,7 @@ emailVerifcation(res.user)
 
       <header className="mb-6">
 <h1 className="text-2xl font-semibold text-[#0A2342]">Create your account</h1>
-<p className="text-sm text-gray-500 mt-1">Use your NSTU email to sign up for the Tax & VAT system.</p>
+<p className="text-gray-600 mt-2">Join us today and make a difference!</p>
 </header>
 
 <form className="w-full lg:w-[80%] space-y-3 mt-2" onSubmit={handleSubmit(handleRegister)} >

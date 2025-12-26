@@ -1,5 +1,5 @@
 import React, { use } from 'react';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import logo from "../assets/Logo2.png"
 import { House } from 'lucide-react';
 import { AuthContext } from '../Context/AuthContext';
@@ -8,12 +8,15 @@ import { toast } from 'react-toastify';
 const Navbar = () => {
 
   const {user,logoutUser}=use(AuthContext);
-  console.log(user)
+  const navigate=useNavigate();
 
   const links=<div className='flex flex-col md:flex-row gap-6 items-center'>
     <Link to="/" className='flex gap-1 items-center text-xl'> Home</Link>
+    { user ? <>
     <Link to="/donors" className='text-xl'>Find Donors</Link>
     <Link to="/requests" className='text-xl'>All Requests</Link>
+    </> : null
+}
     <Link to="/aboutUs" className='text-xl'>About Us</Link>
 
   </div>
@@ -22,7 +25,9 @@ const Navbar = () => {
   {
     logoutUser()
     .then(()=>{
+       navigate("/auth")
       toast.success("Logged Out Successfully")
+     
     })
     .catch((err)=>{
     toast.error(err.message)

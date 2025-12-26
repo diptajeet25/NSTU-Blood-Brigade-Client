@@ -11,6 +11,9 @@ import AllRequest from "../Layout/AllRequest";
 import AllDonar from "../Layout/AllDonar";
 import MyProfile from "../Layout/MyProfile";
 import MyRequests from "../Pages/MyRequests";
+import EligbleDonors from "../Components/EligbleDonors";
+import PrivateRoute from "./PrivateRoute";
+import About from "../Pages/About";
 
 const router = createBrowserRouter([
   {
@@ -39,12 +42,12 @@ const router = createBrowserRouter([
   },
   {
     path:"/beADonor",
-    element:<DonarLayout></DonarLayout>
+    element:<PrivateRoute><DonarLayout></DonarLayout></PrivateRoute>
 
   },
   {
     path:"/requestBlood",
-    element:<RequestLayout></RequestLayout>
+    element:<PrivateRoute><RequestLayout></RequestLayout></PrivateRoute>
   },
   {
     path:"/verify-email",
@@ -52,19 +55,27 @@ const router = createBrowserRouter([
   },
   {
     path:"/requests",
-    element:<AllRequest></AllRequest>
+    element:<PrivateRoute><AllRequest></AllRequest></PrivateRoute>
   },
   {
     path:"/donors",
-    element:<AllDonar></AllDonar>
+    element:<PrivateRoute><AllDonar></AllDonar></PrivateRoute>
   },
   {
     path:"/profile",
-    element:<MyProfile></MyProfile>
+    element:<PrivateRoute><MyProfile></MyProfile></PrivateRoute>
   },
   {
     path:"/myrequests",
-    element:<MyRequests></MyRequests>
+    element:<PrivateRoute><MyRequests></MyRequests></PrivateRoute>
+  },
+  {
+    path:"/eligbleDonors/:_id",
+    element:<PrivateRoute><EligbleDonors></EligbleDonors></PrivateRoute>,
+  },
+  {
+    path:"/aboutUs",
+    element:<About></About>
   }
 ]);
 export default router;

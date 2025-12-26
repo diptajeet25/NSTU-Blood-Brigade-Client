@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import GoogleLogin from "../Context/GoogleLogin";
 import { AuthContext } from "../Context/AuthContext";
 import AuthPageSide from "../components/AuthPageSide";
@@ -9,24 +9,25 @@ import { toast } from "react-toastify";
 
 const SignIn = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const { loginUser,logoutUser } = useContext(AuthContext);
+  const { loginUser} = useContext(AuthContext);
   const navigate = useNavigate();
   const [load, setLoad] = useState(false);
+  const location=useLocation();
 
   const handleLogin =async (data) => {
     setLoad(true);
 try{
   const res=await loginUser(data.email, data.password)
+  console.log(res.user);
   await res.user.reload();
   if(!res.user.emailVerified)
   {
-    await logoutUser();
     toast.error("Please verify your email before logging in.");
     setLoad(false);
     return;
   }
    toast.success("Successfully logged in");
-    navigate("/");
+    navigate(location.state || "/");
 
 }
 catch(err)
@@ -47,9 +48,7 @@ catch(err)
 
         <header className="mb-6">
           <h1 className="text-3xl font-bold text-[#0A2342]">Welcome Back</h1>
-          <p className="text-sm text-gray-500 mt-1">
-            Sign in using your NSTU email & password.
-          </p>
+          <p className="text-gray-600 mt-2">Sign in to continue to NSTU Blood Brigade</p>
         </header>
 
         <form className="w-full lg:w-[80%] space-y-4 mt-2" onSubmit={handleSubmit(handleLogin)}>
