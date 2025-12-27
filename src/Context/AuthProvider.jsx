@@ -33,7 +33,7 @@ const AuthProvider = ({children}) => {
     const emailVerifcation=async(user)=>
     {
       return await sendEmailVerification(user,{
-        url:"http://localhost:5173/auth",
+        url:"https://musical-nasturtium-71d35c.netlify.app/auth",
          handleCodeInApp: false,
       })
     }
