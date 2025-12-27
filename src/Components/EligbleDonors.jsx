@@ -37,6 +37,7 @@ const EligbleDonors = () => {
             return <BloodRippleLoader></BloodRippleLoader>
   return (
     <div>
+      <title>Eligble Donors - NSTU Blood Brigade</title>
         <Navbar></Navbar>
         <h2 className='text-3xl font-bold text-center mt-8'>Eligble Donors in {state?.district} for {state?.bloodGroup}:{donors.length}</h2>
    

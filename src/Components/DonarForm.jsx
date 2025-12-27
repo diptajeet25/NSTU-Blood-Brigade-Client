@@ -55,6 +55,7 @@ const queryClient = useQueryClient();
     const handleRegisterDonar=(data)=>
     {
       data.photoURL=user?.photoURL;
+      data.availability=true;
       console.log(data);
       setLoad(true);
       axiosSecure.post('/become-donor',data)

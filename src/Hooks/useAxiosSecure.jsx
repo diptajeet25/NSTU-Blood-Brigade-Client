@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router';
 import { AuthContext } from '../Context/AuthContext';
 
 const axiosSecure=axios.create({
-    baseURL:"http://localhost:3000"
+    baseURL:"https://nstu-blood-brigade-server.vercel.app"
 
 
 

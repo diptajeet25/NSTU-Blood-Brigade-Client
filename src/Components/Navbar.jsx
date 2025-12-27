@@ -1,5 +1,5 @@
 import React, { use } from 'react';
-import { Link, useNavigate } from 'react-router';
+import { Link, NavLink, useNavigate } from 'react-router';
 import logo from "../assets/Logo2.png"
 import { House } from 'lucide-react';
 import { AuthContext } from '../Context/AuthContext';
@@ -11,13 +11,13 @@ const Navbar = () => {
   const navigate=useNavigate();
 
   const links=<div className='flex flex-col md:flex-row gap-6 items-center'>
-    <Link to="/" className='flex gap-1 items-center text-xl'> Home</Link>
+    <NavLink to="/" className={({isActive}) => `flex gap-1 items-center text-xl ${isActive ? 'border-b-4 border-red-600' : ''}`}> Home</NavLink>
     { user ? <>
-    <Link to="/donors" className='text-xl'>Find Donors</Link>
-    <Link to="/requests" className='text-xl'>All Requests</Link>
+   <NavLink to="/donors" className={({isActive}) => `text-xl ${isActive ? 'border-b-4 border-red-600' : ''}`}>Find Donors</NavLink>
+    <NavLink to="/requests" className={({isActive}) => `text-xl ${isActive ? 'border-b-4 border-red-600' : ''}`}>All Requests</NavLink>
     </> : null
 }
-    <Link to="/aboutUs" className='text-xl'>About Us</Link>
+    <NavLink to="/aboutUs" className={({isActive}) => `text-xl ${isActive ? 'border-b-4 border-red-600' : ''}`}>About Us</NavLink>
 
   </div>
 

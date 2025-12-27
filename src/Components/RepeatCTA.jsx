@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 const RepeatCTA = () => {
   return (
     <section className="bg-red-50 py-20">
@@ -9,13 +10,13 @@ const RepeatCTA = () => {
         </h2>
 
         <div className="mt-8 flex justify-center flex-wrap gap-5">
-          <button className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-lg font-semibold transition">
-            Register Now
-          </button>
+          <Link to="/BeADonor" className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-lg font-semibold transition">
+            Become a Donor
+          </Link>
 
-          <button className="border border-red-600 text-red-600 hover:bg-red-100 px-8 py-3 rounded-lg font-semibold transition">
+          <Link to='/RequestBlood' className="border border-red-600 text-red-600 hover:bg-red-100 px-8 py-3 rounded-lg font-semibold transition">
             Request Blood
-          </button>
+          </Link>
         </div>
 
       </div>

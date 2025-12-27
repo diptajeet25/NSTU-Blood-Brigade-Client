@@ -6,6 +6,7 @@ import { AuthContext } from '../Context/AuthContext.jsx';
 import useAxiosSecure from '../Hooks/useAxiosSecure.jsx';
 import BloodRippleLoader from '../Components/BloodLoading.jsx';
 import RequestCard from '../Components/RequestCard.jsx';
+import { set } from 'react-hook-form';
 
 const AllRequest = () => {
     const {user,loading}=use(AuthContext);
@@ -26,6 +27,32 @@ const AllRequest = () => {
         }
     })
 
+    const handleFilterByGroup=async(event)=>
+    {
+      const selectedGroup=event.target.value;
+      if(selectedGroup==="All")
+      {
+        const res=await axiosSecure.get(`/requests?page=${page}&limit=${limit}`);
+        setRequests(res.data.requests || []);
+        setTotalPages(res.data.totalPages || 1);
+
+      }
+      else
+      {
+        const res=await axiosSecure.get(`/requests`,
+        {
+          params:{
+            bloodGroup:selectedGroup,
+            page:page,
+            limit:limit
+          }
+        }
+      );
+      setRequests(res.data.requests || []);
+      setTotalPages(res.data.totalPages || 1);
+      }
+    }
+
     console.log(requests);
 
     if(loading || isLoading){
@@ -33,9 +60,28 @@ const AllRequest = () => {
     }
   return (
     <div>
+      <title>All Requests-NSTU Blood Brigade</title>
         <Navbar></Navbar>
         <div className='min-h-[80vh] flex flex-col items-center pt-8'>
             <h2 className='text-3xl md:text-4xl font-bold'>Requests For Blood</h2>
+
+          <div className='w-full  flex justify-end   rounded-full mt-2 mb-6 px-16'>
+            <select onChange={handleFilterByGroup} className='mt-4 border px-3 py-2 rounded-lg bg-white'>
+              <option disabled selected>Filter by Blood Group</option>
+              <option value="All">All</option>
+              <option value="A+">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+              <option value="O+">O+</option>
+              <option>O-</option>
+            </select>
+            </div>    
+            {
+            requests.length===0 && <h3 className='text-xl font-semibold mt-20'>No requests found.</h3>
+            }        
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 gap-y-4 mt-6 w-[95%] md:w-[95%] lg:w-[88%] mx-auto mb-10'>
             {
                 requests.map(request=><RequestCard request={request} key={request._id}></RequestCard>)

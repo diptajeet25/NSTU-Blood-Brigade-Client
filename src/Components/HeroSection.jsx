@@ -1,5 +1,6 @@
 import React from "react";
 import hero from '../assets/hero (2).png'
+import { Link } from "react-router";
 
 const HeroSection = () => {
   return (
@@ -18,13 +19,13 @@ const HeroSection = () => {
           </p>
 
           <div className="mt-8 flex flex-wrap gap-4">
-            <button className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-semibold transition">
+            <Link to="/requestBlood" className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-semibold transition">
               Request Blood
-            </button>
+            </Link>
 
-            <button className="border border-red-600 text-red-600 hover:bg-red-50 px-6 py-3 rounded-lg font-semibold transition">
+            <Link to="/beADonor" className="border border-red-600 text-red-600 hover:bg-red-50 px-6 py-3 rounded-lg font-semibold transition">
               Become a Donor
-            </button>
+            </Link>
           </div>
         </div>
 

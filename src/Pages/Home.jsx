@@ -9,6 +9,7 @@ import FAQ from '../Components/FAQ';
 const Home = () => {
   return (
     <div>
+      <title>Home-NSTU Blood Brigade</title>
         <HeroSection></HeroSection>
         <LiveStatatics></LiveStatatics>
         <WhyNSTU></WhyNSTU>

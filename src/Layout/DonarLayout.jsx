@@ -28,8 +28,9 @@ const DonarLayout = () => {
   console.log(donorData);
   return (
     <div>
+      <title>Be A Donor-NSTU Blood Brigade</title>
         <Navbar></Navbar>
-       {!donorData
+       {donorData.message==="No donor found"
   ? <DonarForm />
   : <AlreadyDonorCard donorData={donorData} />
 }

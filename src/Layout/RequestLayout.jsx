@@ -6,6 +6,7 @@ import RequestForm from '../Components/RequestForm';
 const RequestLayout = () => {
   return (
     <div>
+      <title>Request Blood-NSTU Blood Brigade</title>
         <Navbar></Navbar>
         <RequestForm></RequestForm>
         <Footer></Footer>

@@ -1,4 +1,5 @@
 import { Phone, Mail, MapPin } from "lucide-react";
+import { Link } from "react-router";
 
 const Footer = () => {
   return (
@@ -20,10 +21,10 @@ const Footer = () => {
             Quick Links
           </h3>
           <ul className="space-y-2 text-sm">
-            <li className="hover:text-white cursor-pointer">Home</li>
-            <li className="hover:text-white cursor-pointer">Find Blood</li>
-            <li className="hover:text-white cursor-pointer">Become a Donor</li>
-            <li className="hover:text-white cursor-pointer">Emergency Request</li>
+            <li className="hover:text-white cursor-pointer"><Link to="/">Home</Link></li>
+            <li className="hover:text-white cursor-pointer"><Link to="/donors">Find Blood</Link></li>
+            <li className="hover:text-white cursor-pointer"><Link to="/beADonor">Become a Donor</Link></li>
+            <li className="hover:text-white cursor-pointer"><Link to="/requests">Emergency Request</Link></li>
           </ul>
         </div>
 
@@ -33,7 +34,7 @@ const Footer = () => {
           </h3>
           <ul className="space-y-3 text-sm">
             <li className="flex items-center gap-2">
-              <Phone size={16} /> +880 1XXXXXXXXX
+              <Phone size={16} /> +880 1735863818
             </li>
             <li className="flex items-center gap-2">
               <Mail size={16} /> support@nstubloodbrigade.org
@@ -52,9 +53,9 @@ const Footer = () => {
           <p className="text-sm mb-4">
             One donation can save up to three lives.
           </p>
-          <button className="bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded-md text-sm font-semibold transition">
+          <Link to="/beADonor" className="bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded-md text-sm font-semibold transition">
             Become a Donor
-          </button>
+          </Link>
         </div>
 
       </div>

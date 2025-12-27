@@ -18,7 +18,7 @@ const PrivateRoute = ({children}) => {
     }
     if(!user)
     {
-            toast.warning("You must be logged in to access this page.");
+            // toast.warning("You must be logged in to access this page.");
             return <Navigate to="/auth" replace />;
     }
     if (!user.emailVerified) {

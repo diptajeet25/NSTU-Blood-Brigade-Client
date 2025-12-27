@@ -19,7 +19,7 @@ const MyProfile = () => {
   const [profileData, setProfileData] = useState(null)
   const [departments, setDepartments] = useState([]);
   const [districts, setDistricts] = useState([]);
-  const { data, isLoading } = useQuery({
+  const { data, isLoading,refetch } = useQuery({
     queryKey: ['myprofile', user?.email],
     enabled: !!user?.email && !loading,
     queryFn: async () => {
@@ -127,15 +127,29 @@ const MyProfile = () => {
 
   }, [data, districts, setValue]);
 
+  const changeAvaiability=async(data)=>{
+    console.log(data);
+
+    const res=await axiosSecure.patch(`/donor/availability?email=${user?.email}`,{availability:data});
+    if(res.data.modifiedCount>0)
+    {
+      toast.success("Availability status updated");
+      refetch();
+    }
+
+  }
+
 
 
   if (loading || isLoading) {
     return <BloodRippleLoader></BloodRippleLoader>
   }
+  
 
 
   return (
     <div>
+      <title >My Profile-NSTU Blood Brigade</title>
       <Navbar></Navbar>
       <div className="min-h-[70vh] bg-slate-100 px-4 py-16 flex justify-center">
         <div className="w-full max-w-4xl bg-white rounded-3xl shadow-xl overflow-hidden">
@@ -242,8 +256,13 @@ const MyProfile = () => {
           </div>
           <div className=' flex justify-center'>
             {
-              data ? <button onClick={editProfile} className='btn btn-primary w-1/2 lg:w-1/3 text-xl  mx-auto rounded-xl mb-6'>Edit Profile</button> :
-                <Link to="/beADonor" className='btn btn-primary w-1/3 mb-6 text-xl mx-auto rounded-xl'>Become a Donor</Link>
+              data ?<div className='w-[80%] md:w-[30%] mb-6 mx-auto  flex flex-col md:flex-row justify-center gap-2  items-center'> <button onClick={editProfile} className='btn btn-primary  text-xl  mx-auto rounded-xl '>Edit Profile</button>
+              {
+                data?.availability===true ? <button onClick={()=>changeAvaiability(!data?.availability)} className='btn btn-warning   text-xl mx-auto rounded-xl'>Make me Unavailable</button> :
+                  <button onClick={()=>changeAvaiability(!data?.availability)} className='btn btn-success   text-xl mx-auto rounded-xl'>Make me Available</button>
+              }
+              </div> :
+                <Link to="/beADonor" className='btn btn-primary w-1/3 mb-6  text-xl mx-auto rounded-xl'>Become a Donor</Link>
             }
           </div>
         </div>

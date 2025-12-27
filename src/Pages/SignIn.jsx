@@ -43,6 +43,7 @@ catch(err)
   return (
     <div className="flex my-2 w-full lg:w-[90%] mx-auto justify-center items-center min-h-[calc(100vh-100px)]
 ">
+  <title>Sign In-NSTU Blood Brigade</title>
 
       <div className="w-full lg:w-6/12 flex flex-col items-center justify-center p-8 px-3">
 

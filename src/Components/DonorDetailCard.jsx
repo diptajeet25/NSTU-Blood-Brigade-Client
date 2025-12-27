@@ -18,7 +18,7 @@ const DonorDetailCard = ({donor}) => {
       <div className='flex justify-between gap-2'>
        <span className='text-2xl bg-[#7A2E2E] text-white px-4 py-1 rounded-2xl  text-center'>{donor.bloodGroup}</span>
        {
-        daysDiff>=120 ?<span className="bg-green-600 text-white font-bold px-3 py-1 rounded-2xl ">Active Donor</span> :
+        daysDiff>=120 && donor.availability ?<span className="bg-green-600 text-white font-bold px-3 py-1 rounded-2xl ">Active Donor</span> :
         <span className='text-white font-bold px-3 py-1 bg-gray-600 rounded-2xl'>Not Available</span>
        }
        </div>

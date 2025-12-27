@@ -73,6 +73,7 @@ emailVerifcation(res.user)
   }
   return ( 
     <div>
+      <title>Sign Up-NSTU Blood Brigade</title>
     <div className="flex my-2  w-full lg:w-[95%] mx-auto">
       <div className="w-full lg:w-6/12 flex flex-col items-center justify-center p-8 px-3 ">
 

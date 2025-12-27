@@ -7,6 +7,7 @@ import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 import DonarLayout from './DonarLayout';
 import DonorDetailCard from '../Components/DonorDetailCard';
+import { set } from 'react-hook-form';
 
 const AllDonar = () => {
     const axiosSecure=useAxiosSecure();
@@ -32,15 +33,60 @@ const AllDonar = () => {
 
         }
     )
-    console.log(donors);
+    const handleFilterByGroup=async(event)=>
+    {
+      const selectedGroup=event.target.value;
+    
+      if(selectedGroup==="All")
+      {
+        const res=await axiosSecure.get(`/donors?page=${page}&limit=${limit}`);
+        setDonors(res.data.donors || []);
+        setTotalPages(res.data.totalPages || 1);
+      }
+     else 
+     {
+      const res=await axiosSecure.get(`/donors`,
+        {
+          params:{
+            bloodGroup:selectedGroup,
+            page:page,
+            limit:limit
+          }
+        }
+      );
+      setDonors(res.data.donors || []);
+      setTotalPages(res.data.totalPages || 1);
+     }
+    }
+  
     if(loading || isLoading){
         return <BloodRippleLoader></BloodRippleLoader>
     }
   return (
      <div>
+      <title>All Donors-NSTU Blood Brigade</title>
         <Navbar></Navbar>
+
         <div className='min-h-[80vh] flex flex-col items-center pt-8'>
             <h2 className='text-3xl md:text-4xl font-bold'>All Donors</h2>
+            <div className='w-full  flex justify-end   rounded-full mt-2 mb-6 px-16'>
+            <select onChange={handleFilterByGroup} className='mt-4 border px-3 py-2 rounded-lg bg-white'>
+              <option disabled selected>Filter by Blood Group</option>
+              <option value="All">All</option>
+              <option value="A+">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+              <option value="O+">O+</option>
+              <option>O-</option>
+            </select>
+            </div>
+            {
+            donors.length===0 && <h3 className='text-xl font-semibold mt-20'>No donors found.</h3>
+            }
+
             <div className='grid grid-cols-1  lg:grid-cols-2 gap-12 gap-y-4 lg:gap-x-20 mt-6 w-[98%] md:w-[85%] lg:w-[75%] mx-auto mb-10'>
            {
             donors.map(donor=> <DonorDetailCard donor={donor} key={donor._id}></DonorDetailCard>)

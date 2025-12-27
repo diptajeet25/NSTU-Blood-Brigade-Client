@@ -17,6 +17,7 @@ const VerifyEmail = () => {
 
   return (
     <>
+    <title>Verify Email-NSTU Blood Brigade</title>
       <Navbar />
 
       <div className="min-h-[70vh] flex items-center justify-center px-4">
